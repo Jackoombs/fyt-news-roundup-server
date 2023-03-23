@@ -9,3 +9,8 @@ export interface Article {
   date?: Date;
   keywords: string[];
 }
+
+export interface Category {
+  url: string;
+  outlet: string;
+}
