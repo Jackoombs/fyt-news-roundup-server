@@ -11,5 +11,21 @@ export const findOutletByName = async (name: string) => {
 };
 
 export const getAllOutlets = async () => {
-  return await prisma.outlet.findMany();
+  return await prisma.outlet.findMany({
+    include: {
+      categorys: {
+        where: {
+          active: true,
+        },
+      },
+    },
+  });
+};
+
+export const getOutlet = async (name: string) => {
+  return await prisma.outlet.findUniqueOrThrow({
+    where: {
+      name,
+    },
+  });
 };

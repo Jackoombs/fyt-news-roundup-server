@@ -1,25 +1,29 @@
 import { $log } from "@tsed/common";
 import { Outlet } from "@prisma/client";
-import puppeteer, { Page, Browser } from "puppeteer";
+import { Page, Browser } from "puppeteer";
 import { postArticles } from "src/models/article";
 import { getAllOutlets } from "src/models/outlet";
 import { getArticles } from "./getArticles";
 import { Article } from "../../type";
+import { getCategorys } from "./getCategorys";
 
-export const scheduleScraping = async () => {
+export const scheduleScraping = async (browser: Browser) => {
   const now = new Date();
   const hour = now.getUTCHours();
 
   if (hour >= 18 && hour <= 22) {
-    await scrapeSites();
+    await scrapeSites(browser);
+  }
+
+  if (hour >= 23 && hour <= 0) {
+    await getCategorys(browser);
   }
 
   setTimeout(scheduleScraping, 30 * 60 * 1000);
 };
 
-export const scrapeSites = async () => {
+export const scrapeSites = async (browser: Browser) => {
   try {
-    const browser = await puppeteer.launch();
     await scrapeAndPostOutlets(browser);
   } catch (error) {
     $log.error({
@@ -46,7 +50,9 @@ const scrapeAndPostOutlets = async (browser: Browser) => {
 
   const articles = await Promise.all(
     outlets.flatMap((outlet) =>
-      outlet.urls.map((url) => scrapeOutletUrl(browser, outlet, url))
+      outlet.categorys.map((category) =>
+        scrapeOutletUrl(browser, outlet, category.url)
+      )
     )
   );
 
