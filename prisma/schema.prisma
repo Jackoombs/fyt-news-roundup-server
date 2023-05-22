@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Article {
+  id            String   @id @default(uuid())
+  title         String?
+  category      String?
+  outlet        Outlet   @relation(fields: [outletId], references: [id])
+  outletId      String
+  summary       String?
+  content       String?
+  condensedBody String?
+  link          String   @unique
+  saved         Boolean  @default(false)
+  keywords      String[]
+
+  date  DateTime? @default(now())
+}
+
+model Outlet {
+  id        String     @id @default(uuid())
+  name      String     @unique
+  articles  Article[]
+  categorys Category[]
+  baseUrl   String
+}
+
+model Category {
+  id       String  @id @default(uuid())
+  url       String    @unique
+  active   Boolean @default(false)
+  outlet   Outlet  @relation(fields: [outletId], references: [id])
+  outletId String
+}
