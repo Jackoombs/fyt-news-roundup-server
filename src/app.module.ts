@@ -18,6 +18,7 @@ import { BbcArticleScraperService } from './scrape/scrape-articles/bbc-article-s
 import { ScraperUtilsService } from './scrape/scraper-utils/scraper-utils.service';
 import { stopWords } from './scrape/scraper-utils/stopwords';
 import { ThedailymailArticleScraperService } from './scrape/scrape-articles/thedailymail-article-scraper/thedailymail-article-scraper.service';
+import { KeywordsService } from './keywords/keywords.service';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { ThedailymailArticleScraperService } from './scrape/scrape-articles/thed
     ScraperUtilsService,
     { provide: 'STOPWORDS', useValue: stopWords },
     ThedailymailArticleScraperService,
+    KeywordsService,
   ],
 })
 export class AppModule {}
