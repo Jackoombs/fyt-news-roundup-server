@@ -24,7 +24,7 @@ model Article {
   saved         Boolean  @default(false)
   keywords      String[]
 
-  date  DateTime? @default(now())
+  date  DateTime @default(now())
 }
 
 model Outlet {
