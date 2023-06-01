@@ -53,7 +53,6 @@ export class ArticleResolver {
       keywords,
       take,
     );
-    console.log(relatedArticles);
     return relatedArticles;
   }
 

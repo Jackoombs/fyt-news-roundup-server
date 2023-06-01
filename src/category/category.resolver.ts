@@ -34,7 +34,6 @@ export class CategoryResolver {
   updateCategory(
     @Args('updateCategoryInput') updateCategoryInput: UpdateCategoryInput,
   ) {
-    console.log(updateCategoryInput.active);
     return this.categoryService.update(updateCategoryInput);
   }
 

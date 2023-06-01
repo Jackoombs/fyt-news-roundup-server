@@ -29,7 +29,6 @@ export abstract class OutletArticleScraperService {
           outlet.id,
         );
         outletArticles.push(...categoryArticles);
-        console.log(categoryArticles.map((category) => category.title));
       } catch (error) {
         console.log(error);
       }

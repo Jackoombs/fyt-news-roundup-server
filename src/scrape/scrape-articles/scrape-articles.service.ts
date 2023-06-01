@@ -27,7 +27,6 @@ export class ScrapeArticlesService {
             outlet,
           );
       }
-      console.log(outletArticles);
       allArticles.push(...outletArticles);
     }
 
