@@ -21,25 +21,19 @@ export class ArticleService {
   }
 
   async createMany(createArticleInputArr: CreateArticleInput[]) {
-    const existingArticles = await this.prisma.article.findMany({
-      where: {
-        link: {
-          in: createArticleInputArr.map((input) => input.link),
+    for (const data of createArticleInputArr) {
+      const exisitingArticle = await this.prisma.article.findUnique({
+        where: {
+          link: data.link,
         },
-      },
-    });
+      });
 
-    const existingArticleLinks = existingArticles.map((input) => input.link);
-
-    const newInputs = createArticleInputArr.filter(
-      (input) => !existingArticleLinks.includes(input.link),
-    );
-
-    if (newInputs.length === 0) return;
-
-    await this.prisma.article.createMany({
-      data: newInputs,
-    });
+      if (!exisitingArticle) {
+        await this.prisma.article.create({
+          data,
+        });
+      }
+    }
   }
 
   async findAll(
