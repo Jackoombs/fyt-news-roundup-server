@@ -6,7 +6,9 @@ export class BrowserService {
   public browser: Browser;
 
   async openBrowser() {
-    this.browser = await puppeteer.launch();
+    this.browser = await puppeteer.launch({
+      args: ['--no-sandbox'],
+    });
   }
 
   async closeBrowser() {
