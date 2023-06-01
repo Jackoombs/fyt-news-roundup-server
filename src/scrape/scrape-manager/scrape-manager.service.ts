@@ -13,8 +13,8 @@ export class ScrapeManagerService implements OnApplicationBootstrap {
   ) {}
 
   async onApplicationBootstrap() {
-    const outlets = await this.outletService.findAll();
-    await this.browserService.openBrowser();
-    await this.scrapeArticlesService.scrapeArticles(outlets);
+    // const outlets = await this.outletService.findAll();
+    // await this.browserService.openBrowser();
+    // await this.scrapeArticlesService.scrapeArticles(outlets);
   }
 }
