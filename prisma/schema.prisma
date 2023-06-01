@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -17,7 +18,7 @@ model Article {
   outlet        Outlet   @relation(fields: [outletId], references: [id])
   outletId      String
   summary       String?
-  content       String?
+  content       String[]
   condensedBody String?
   link          String   @unique
   saved         Boolean  @default(false)

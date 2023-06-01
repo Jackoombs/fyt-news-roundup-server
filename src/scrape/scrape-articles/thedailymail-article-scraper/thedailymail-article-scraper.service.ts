@@ -30,6 +30,7 @@ export class ThedailymailArticleScraperService extends OutletArticleScraperServi
           category: this.scraperUtils.getUrlDirectory(link, 1),
           outletId: outletId,
           keywords: title ? this.scraperUtils.getKeyWords(title) : [],
+          content: [],
         };
       }),
     );
@@ -50,9 +51,8 @@ export class ThedailymailArticleScraperService extends OutletArticleScraperServi
             }, paragraph),
           ),
         );
-        const content = this.scraperUtils.joinArticleContent(contentArray);
 
-        article.content = content;
+        article.content = contentArray.filter(Boolean);
         article.date = date ? new Date(date) : undefined;
       }
     }

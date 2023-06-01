@@ -21,8 +21,8 @@ export class Article {
   @Field()
   summary?: string;
 
-  @Field()
-  content?: string;
+  @Field(() => [String])
+  content: string[];
 
   @Field()
   condensedBody?: string;

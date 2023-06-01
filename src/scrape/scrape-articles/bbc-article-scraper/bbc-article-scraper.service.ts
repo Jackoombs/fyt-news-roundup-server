@@ -38,6 +38,7 @@ export class BbcArticleScraperService extends OutletArticleScraperService {
           keywords: title ? this.scraperUtils.getKeyWords(title) : [],
           date: date ? new Date(date) : undefined,
           outletId,
+          content: [],
         };
       }),
     );
@@ -59,8 +60,7 @@ export class BbcArticleScraperService extends OutletArticleScraperService {
             }, paragraph),
           ),
         );
-        const content = this.scraperUtils.joinArticleContent(contentArray);
-        article.content = content;
+        article.content = contentArray.filter(Boolean);
       }
     }
     return articles;

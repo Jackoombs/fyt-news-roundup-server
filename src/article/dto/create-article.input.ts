@@ -14,8 +14,8 @@ export class CreateArticleInput {
   @Field()
   summary?: string;
 
-  @Field()
-  content?: string;
+  @Field(() => [String])
+  content: string[];
 
   @Field()
   link: string;
