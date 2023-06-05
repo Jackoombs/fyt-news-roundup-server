@@ -16,4 +16,7 @@ export class FilterArticleInput {
 
   @Field({ nullable: true })
   search?: string;
+
+  @Field({ nullable: true })
+  saved?: boolean;
 }

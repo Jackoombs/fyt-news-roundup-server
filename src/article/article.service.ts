@@ -67,6 +67,7 @@ export class ArticleService {
         title: {
           search: searchString,
         },
+        saved: filterBy?.saved,
       },
       include: {
         outlet: true,
